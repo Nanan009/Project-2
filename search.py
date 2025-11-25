@@ -3,15 +3,12 @@ from evaluation import evaluate
 def forward_selection(all_features):
     """
     Performs greedy forward selection.
-    
-    Parameters:
-        all_features (list): list of all feature identifiers (e.g., [1, 2, 3, ...])
-    
-    Returns:
-        list: the selected features in the order they were added
     """
     selected = []
-    print("Beginning Forward Selection...")
+    
+    # track the best so far
+    current_best_score = 0  
+    print("Beginning search.\n")
 
     while len(selected) < len(all_features):
         best_feature = None
@@ -21,48 +18,69 @@ def forward_selection(all_features):
             if f not in selected:
                 temp = selected + [f]
                 score = evaluate(temp)
-                print(f"   Evaluating {temp} → score = {score:.4f}")
+                
+                print(f"Using feature(s) {{{','.join(map(str, temp))}}} accuracy is {score:.1f}%")
 
                 if score > best_score:
                     best_score = score
                     best_feature = f
 
-        selected.append(best_feature)
-        print(f">>> Added feature {best_feature} (score = {best_score:.4f})\n")
+        # greedy check
+        if best_score > current_best_score:
+            current_best_score = best_score
+            selected.append(best_feature)
+            print(f"\nFeature set {{{','.join(map(str, selected))}}} was best, accuracy is {current_best_score:.1f}%\n")
+        else:
+            print(f"\n(Warning, Accuracy has decreased!)")
+            break
 
-    print("Forward Selection finished.")
+    # final report
+    print(f"Finished search!! The best feature subset is {{{','.join(map(str, selected))}}}, which has an accuracy of {current_best_score:.1f}%")
     return selected
 
 
 def backward_elimination(all_features):
     """
     Performs greedy backward elimination.
-    
-    Parameters:
-        all_features (list): list of all feature identifiers (e.g., [1, 2, 3, ...])
-    
-    Returns:
-        list: the remaining features after elimination
     """
     selected = all_features.copy()
-    print("Beginning Backward Elimination...")
+    
+    # track best score (start with full set accuracy)
+    current_best_score = evaluate(selected)
+    
+    print("Beginning search.\n")
+    print(f"Using feature(s) {{{','.join(map(str, selected))}}} accuracy is {current_best_score:.1f}%")
+    print(f"\nFeature set {{{','.join(map(str, selected))}}} was best, accuracy is {current_best_score:.1f}%\n")
 
-    while len(selected) > 1:
+    while len(selected) > 0:
         best_feature_to_remove = None
         best_score = -1
 
         for f in selected:
             temp = selected.copy()
             temp.remove(f)
-            score = evaluate(temp)
-            print(f"   Evaluating {temp} (removed {f}) → score = {score:.4f}")
+            
+            # handle empty set just in case
+            if len(temp) == 0:
+                score = evaluate([])
+            else:
+                score = evaluate(temp)
+                
+            print(f"Using feature(s) {{{','.join(map(str, temp))}}} accuracy is {score:.1f}%")
 
             if score > best_score:
                 best_score = score
                 best_feature_to_remove = f
 
-        selected.remove(best_feature_to_remove)
-        print(f">>> Removed feature {best_feature_to_remove} (score = {best_score:.4f})\n")
+        # only remove if accuracy is better (or equal)
+        if best_score >= current_best_score:
+            current_best_score = best_score
+            selected.remove(best_feature_to_remove)
+            print(f"\nFeature set {{{','.join(map(str, selected))}}} was best, accuracy is {current_best_score:.1f}%\n")
+        else:
+            print(f"\n(Warning, Accuracy has decreased!)")
+            break
 
-    print("Backward Elimination finished.")
+    # final report
+    print(f"Finished search!! The best feature subset is {{{','.join(map(str, selected))}}}, which has an accuracy of {current_best_score:.1f}%")
     return selected
