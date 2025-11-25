@@ -20,7 +20,13 @@ from search import forward_selection, backward_elimination
 def main():
     print("Welcome to [Your Name] and [Partner Name]'s Feature Selection Algorithm.\n")
     
-    total_features = int(input("Please enter total number of features: "))
+    try:
+        num_str = input("Please enter total number of features: ")
+        total_features = int(num_str)
+    except ValueError:
+        print("Invalid number. Exiting.")
+        return
+    
     all_features = list(range(1, total_features + 1))
 
     # show accuracy with zero features
@@ -35,22 +41,16 @@ def main():
     choice = input("Your choice: ").strip()
     
     if choice == "1":
-        print("Beginning search.\n")
-        best_set = forward_selection(all_features)
+        forward_selection(all_features)
     elif choice == "2":
-        print("Beginning search.\n")
-        best_set = backward_elimination(all_features)
+        backward_elimination(all_features)
     elif choice == "3":
         print("Not implemented yet — running Forward Selection instead!\n")
-        best_set = forward_selection(all_features)
+        forward_selection(all_features)
     else:
         print("Invalid choice — running Forward Selection")
-        best_set = forward_selection(all_features)
+        forward_selection(all_features)
     
-    # final result
-    final_accuracy = evaluate(best_set)
-    print(f"\nFinished search!! The best feature subset is {best_set}, which has an accuracy of {final_accuracy:.1f}%")   
-
 if __name__ == "__main__":
     main()
 
