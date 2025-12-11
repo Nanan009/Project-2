@@ -42,7 +42,7 @@ Included in `data/`:
 
 ```bash
 $ python3 main.py
-Welcome to Siyuan's Feature Selection Algorithm.
+Welcome to Our Feature Selection Algorithm.
 
 Enter dataset filename: small-test-dataset.txt
 
