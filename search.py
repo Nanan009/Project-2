@@ -61,14 +61,11 @@ def backward_elimination(all_features):
             temp.remove(f)
             
             # handle empty set just in case
-            if len(temp) == 0:
-                score = evaluate([])
-            else:
-                score = evaluate(temp)
+            score = evaluate(temp)
                 
             print(f"Using feature(s) {{{','.join(map(str, temp))}}} accuracy is {score:.1f}%")
 
-            if score > best_score:
+            if score >= best_score:
                 best_score = score
                 best_feature_to_remove = f
 

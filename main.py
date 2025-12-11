@@ -3,7 +3,7 @@ from search import forward_selection, backward_elimination
 from data_loader import load_dataset
 
 def main():
-    print("Welcome to Siyuan's Feature Selection Algorithm.\n")
+    print("Welcome to Siyuan's and NJ's Feature Selection Algorithm.\n")
     
     # ask for dataset file
     filename = input("Enter dataset filename: ").strip()
@@ -11,6 +11,13 @@ def main():
     if not filename.startswith('data/'):
         filename = 'data/' + filename
     
+    # menu
+    print("Type the number of the algorithm you want to run.\n")
+    print("     1) Forward Selection")
+    print("     2) Backward Elimination\n")
+    
+    choice = input("Your choice: ").strip()
+
     # load dataset
     try:
         instances, num_features = load_dataset(filename)
@@ -28,12 +35,6 @@ def main():
     # show accuracy with no features
     print("Running nearest neighbor with no features (random baseline), using \"leaving-one-out\" evaluation, I get an accuracy of 50.0%\n")
     
-    # menu
-    print("Type the number of the algorithm you want to run.\n")
-    print("     1) Forward Selection")
-    print("     2) Backward Elimination\n")
-    
-    choice = input("Your choice: ").strip()
     
     all_features = list(range(1, num_features + 1))
     
