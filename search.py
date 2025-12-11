@@ -7,11 +7,14 @@ def forward_selection(all_features):
     current_best_score = 0  
     print("Beginning search.\n")
 
+    # go through comparing features until all are selected or break
     while len(selected) < len(all_features):
         best_feature = None
-        best_score = -1
+        best_score = 0
 
+        # try adding each feature not yet selected
         for f in all_features:
+            # only consider features not yet selected
             if f not in selected:
                 temp = selected + [f]
                 score = evaluate(temp)
@@ -22,12 +25,12 @@ def forward_selection(all_features):
                     best_score = score
                     best_feature = f
 
-
+        # only add the best feature if it improves accuracy
         if best_score > current_best_score:
             current_best_score = best_score
             selected.append(best_feature)
             print(f"\nFeature set {{{','.join(map(str, selected))}}} was best, accuracy is {current_best_score:.1f}%\n")
-            
+
         else:
             print(f"\n(Warning, Accuracy has decreased!)")
             break
