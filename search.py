@@ -3,6 +3,7 @@ from evaluation import evaluate
 def forward_selection(all_features):
     """
     Performs greedy forward selection.
+    Continues serach through all features while tracking the best subset. (Part 3)
     """
     selected = []
     
