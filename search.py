@@ -2,13 +2,8 @@ from evaluation import evaluate
 import time
 
 def forward_selection(all_features):
-    """
-    Performs greedy forward selection.
-    """
     start_time = time.time()
     selected = []
-    
-    # track the best so far
     current_best_score = 0  
     print("Beginning search.\n")
 
@@ -27,17 +22,18 @@ def forward_selection(all_features):
                     best_score = score
                     best_feature = f
 
-        # greedy check
+
         if best_score > current_best_score:
             current_best_score = best_score
             selected.append(best_feature)
             print(f"\nFeature set {{{','.join(map(str, selected))}}} was best, accuracy is {current_best_score:.1f}%\n")
+            
         else:
             print(f"\n(Warning, Accuracy has decreased!)")
             break
 
     elapsed = time.time() - start_time
-    # final report
+
     print(f"Finished search!! The best feature subset is {{{','.join(map(str, selected))}}}, which has an accuracy of {current_best_score:.1f}%")
     print(f"Time elapsed: {elapsed:.2f} seconds\n")
     return selected
