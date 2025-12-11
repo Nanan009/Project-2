@@ -1,9 +1,11 @@
 from evaluation import evaluate
+import time
 
 def forward_selection(all_features):
     """
     Performs greedy forward selection.
     """
+    start_time = time.time()
     selected = []
     
     # track the best so far
@@ -34,8 +36,10 @@ def forward_selection(all_features):
             print(f"\n(Warning, Accuracy has decreased!)")
             break
 
+    elapsed = time.time() - start_time
     # final report
     print(f"Finished search!! The best feature subset is {{{','.join(map(str, selected))}}}, which has an accuracy of {current_best_score:.1f}%")
+    print(f"Time elapsed: {elapsed:.2f} seconds\n")
     return selected
 
 
@@ -43,6 +47,7 @@ def backward_elimination(all_features):
     """
     Performs greedy backward elimination.
     """
+    start_time = time.time()
     selected = all_features.copy()
     
     # track best score (start with full set accuracy)
@@ -78,6 +83,8 @@ def backward_elimination(all_features):
             print(f"\n(Warning, Accuracy has decreased!)")
             break
 
+    elapsed = time.time() - start_time
     # final report
     print(f"Finished search!! The best feature subset is {{{','.join(map(str, selected))}}}, which has an accuracy of {current_best_score:.1f}%")
+    print(f"Time elapsed: {elapsed:.2f} seconds\n")
     return selected

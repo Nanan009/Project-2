@@ -3,7 +3,7 @@ from search import forward_selection, backward_elimination
 from data_loader import load_dataset
 
 def main():
-    print("Welcome to Siyuan's and NJ's Feature Selection Algorithm.\n")
+    print("Welcome to Our Feature Selection Algorithm.\n")
     
     # ask for dataset file
     filename = input("Enter dataset filename: ").strip()
