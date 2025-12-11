@@ -1,4 +1,4 @@
-Welcome to Siyuan's Feature Selection Algorithm.
+Welcome to Our Feature Selection Algorithm.
 
 Enter dataset filename: 
 This dataset has 10 features (not including the class attribute), with 100 instances.

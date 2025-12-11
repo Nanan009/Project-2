@@ -1,4 +1,4 @@
-Welcome to Siyuan's Feature Selection Algorithm.
+Welcome to Our Feature Selection Algorithm.
 
 Enter dataset filename: large-test-dataset.txt
 
