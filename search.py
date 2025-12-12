@@ -14,7 +14,8 @@ def forward_selection(all_features):
 
     while len(selected) < len(all_features):
         best_feature = None
-        best_score = -1
+        # best_score = -1
+        best_score = 0
 
         for f in all_features:
             if f not in selected:
@@ -59,7 +60,8 @@ def backward_elimination(all_features):
 
     while len(selected) > 0:
         best_feature_to_remove = None
-        best_score = -1
+        # best_score = -1
+        best_score = 0
 
         for f in selected:
             temp = selected.copy()

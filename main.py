@@ -26,8 +26,10 @@ def main():
     set_dataset(instances)
     
     # show accuracy with no features
-    print("Running nearest neighbor with no features (random baseline), using \"leaving-one-out\" evaluation, I get an accuracy of 50.0%\n")
-    
+    # print("Running nearest neighbor with no features (random baseline), using \"leaving-one-out\" evaluation, I get an accuracy of 50.0%\n")
+    default_rate = evaluate([])  
+    print(f"Default rate: {default_rate:.1f}%\n")   
+
     # menu
     print("Type the number of the algorithm you want to run.\n")
     print("     1) Forward Selection")
